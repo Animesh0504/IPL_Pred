@@ -116,7 +116,7 @@ with col4:
 
 #Get all the data for predicting
 
-prediction_array = prediction_array + [runs, wickets, overs, runs_in_prev_5,wickets_in_prev_5]
+prediction_array = prediction_array + [runs, wickets, overs, runs_in_prev_5,wickets_in_prev_5 , 0 , 0]
 prediction_array = np.array([prediction_array])
 predict = model.predict(prediction_array)
 
