@@ -1,3 +1,5 @@
+#import the libraries
+
 import math
 import numpy as np
 import pickle
@@ -6,9 +8,9 @@ import streamlit as st
 #SET PAGE WIDE
 st.set_page_config(page_title='IPL_Score_Predictor',layout="centered")
 
-#Get the ML model 
+#Get the ML model
 
-filename='ml_model_ipl.pkl'
+filename='tree_ml_model.pkl'
 model = pickle.load(open(filename,'rb'))
 
 #Title of the page with CSS
@@ -33,9 +35,7 @@ st.markdown(
 #Add description
 
 with st.expander("Description"):
-    st.info("""A Simple ML Model to predict IPL Scores between teams in an ongoing match. To make sure the model results accurate score and some reliability the minimum no. of current overs considered is greater than 5 overs.
-    
- """)
+    st.info("""Crafting an Elegant Machine Learning Algorithm for Anticipating IPL Scores Amongst Teams in a Live Match. Ensuring both the Model's Result Precision and a Dash of Trustworthiness by Requiring a Minimum of 5 Overs to be Bowled""")
 
 # SELECT THE BATTING TEAM
 
@@ -86,7 +86,7 @@ elif bowling_team == 'Royal Challengers Bangalore':
     prediction_array = prediction_array + [0,0,0,0,0,0,1,0]
 elif bowling_team == 'Sunrisers Hyderabad':
     prediction_array = prediction_array + [0,0,0,0,0,0,0,1]
-  
+
 
 col1, col2 = st.columns(2)
 
@@ -116,7 +116,7 @@ with col4:
 
 #Get all the data for predicting
 
-prediction_array = prediction_array + [runs, wickets, overs, runs_in_prev_5,wickets_in_prev_5 , 0 , 0]
+prediction_array = prediction_array + [runs, wickets, overs, runs_in_prev_5,wickets_in_prev_5]
 prediction_array = np.array([prediction_array])
 predict = model.predict(prediction_array)
 
@@ -124,9 +124,8 @@ predict = model.predict(prediction_array)
 if st.button('Predict Score'):
     #Call the ML Model
     my_prediction = int(round(predict[0]))
-    
+
     #Display the predicted Score Range
-    x=f'PREDICTED MATCH SCORE : {my_prediction-5} to {my_prediction+5}' 
+    x=f'PREDICTED MATCH SCORE : {my_prediction-5} to {my_prediction+5}'
     st.success(x)
-   
 
