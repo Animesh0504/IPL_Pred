@@ -8,7 +8,7 @@ st.set_page_config(page_title='IPL_Score_Predictor',layout="centered")
 
 #Get the ML model 
 
-filename='tree_ml_model.pkl'
+filename='ml_model_ipl.pkl'
 model = pickle.load(open(filename,'rb'))
 
 #Title of the page with CSS
